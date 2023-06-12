@@ -85,7 +85,13 @@ def main():
         for additional_link in additional_links:
             output_filename = save_as_pdf(additional_link, output_directory)
             if output_filename and output_filename not in pdf_files:
-                pdf_files.append(output_filename)
+                if "phabricator" in additional_link:
+                    if "/T" in additional_link:
+                        pdf_files.append(output_filename)
+                    else:
+                        pass
+                else:
+                    pdf_files.append(output_filename)
 
     print("Merging PDFs:")
     merger = PdfMerger()
